@@ -5,47 +5,121 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylouvel <ylouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:14:36 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/01/21 17:05:04 by ylouvel          ###   ########.fr       */
+/*   Created: 2025/01/26 16:17:00 by ylouvel           #+#    #+#             */
+/*   Updated: 2025/01/26 16:48:12 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONE_BOOK_CLASS_H
-#define PHONE_BOOK_CLASS_H
-
-#define MAX_USER 8
-
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <cctype>
 
-class Contact{
+class Contact {
 public:
-    std::string lastName;
     std::string firstName;
-    std::string nickName;
+    std::string lastName;
+    std::string nickname;
+    std::string phoneNumber;
     std::string darkestSecret;
 
-    int number;
-    
-    int add;
-    int exit;
-    int search;
+    void displaySummary(int index) const {
+        std::cout << std::setw(10) << index << " | "
+                  << std::setw(10) << truncate(firstName) << " | "
+                  << std::setw(10) << truncate(lastName) << " | "
+                  << std::setw(10) << truncate(nickname) << std::endl;
+    }
 
-    Contact(void);
-    ~Contact(void);
-};
+    void displayDetails() const {
+        std::cout << "--- Contact Details ---" << std::endl;
+        std::cout << "First Name: " << firstName << std::endl;
+        std::cout << "Last Name: " << lastName << std::endl;
+        std::cout << "Nickname: " << nickname << std::endl;
+        std::cout << "Phone Number: " << phoneNumber << std::endl;
+        std::cout << "Darkest Secret: " << darkestSecret << std::endl;
+    }
 
-class PhoneBook{
 private:
-    Contact contacts[MAX_USER];
-    int nbContact;
-
-public:
-    void addUser(void);
-    void printContact(int i)const;
-    void searchContact(void) const;
-
-    PhoneBook(void);
-    ~PhoneBook(void);
+    std::string truncate(const std::string& str) const {
+        return (str.length() > 10) ? str.substr(0, 9) + "." : str;
+    }
 };
 
-#endif
+class PhoneBook {
+public:
+    PhoneBook() : contactCount(0) {}
+
+    void addContact() {
+        if (contactCount == 8) {
+            std::cout << "PhoneBook is full. Replacing the oldest contact." << std::endl;
+        }
+
+        int index = (contactCount < 8) ? contactCount : contactCount % 8;
+
+        contacts[index].firstName = promptField("Enter First Name: ");
+        contacts[index].lastName = promptField("Enter Last Name: ");
+        contacts[index].nickname = promptField("Enter Nickname: ");
+        contacts[index].phoneNumber = promptField("Enter Phone Number (digits only): ", true);
+        contacts[index].darkestSecret = promptField("Enter Darkest Secret: ");
+
+        if (contactCount < 8) ++contactCount;
+        std::cout << "Contact added successfully!" << std::endl;
+    }
+
+    void searchContacts() const {
+        if (contactCount == 0) {
+            std::cout << "No contacts available." << std::endl;
+            return;
+        }
+
+        std::cout << "     Index | First Name |  Last Name |   Nickname" << std::endl;
+        for (int i = 0; i < contactCount; ++i) {
+            contacts[i].displaySummary(i + 1);
+        }
+
+        std::cout << "Enter the index of the contact to view: ";
+        std::string input;
+        std::getline(std::cin, input);
+
+        if (!isNumber(input)) {
+            std::cout << "Invalid input. Please enter a valid number." << std::endl;
+            return;
+        }
+
+        int index = std::atoi(input.c_str());
+        if (index < 1 || index > contactCount) {
+            std::cout << "Invalid index. Please enter a number between 1 and " << contactCount << "." << std::endl;
+            return;
+        }
+
+        contacts[index - 1].displayDetails();
+    }
+
+private:
+    Contact contacts[8];
+    int contactCount;
+
+    std::string promptField(const std::string& prompt, bool isNumeric = false) {
+        std::string value;
+        while (true) {
+            std::cout << prompt;
+            std::getline(std::cin, value);
+
+            if (value.empty()) {
+                std::cout << "This field cannot be empty. Please try again." << std::endl;
+            } else if (isNumeric && !isNumber(value)) {
+                std::cout << "This field must contain digits only. Please try again." << std::endl;
+            } else {
+                break;
+            }
+        }
+        return value;
+    }
+
+    bool isNumber(const std::string& str) const {
+        for (std::string::size_type i = 0; i < str.size(); ++i) {
+            if (!std::isdigit(str[i])) return false;
+        }
+        return true;
+    }
+};
