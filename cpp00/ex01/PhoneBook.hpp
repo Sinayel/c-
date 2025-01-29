@@ -5,15 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylouvel <ylouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2025/01/26 16:17:00 by ylouvel           #+#    #+#             */
 /*   Updated: 2025/01/26 16:48:12 by ylouvel          ###   ########.fr       */
+=======
+/*   Created: 2025/01/20 14:14:36 by ylouvel           #+#    #+#             */
+/*   Updated: 2025/01/24 16:56:34 by ylouvel          ###   ########.fr       */
+>>>>>>> 7f737ac0baa48de69b4738358c4587596d03d9a4
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+<<<<<<< HEAD
 #include <iomanip>
 #include <string>
 #include <cctype>
+=======
+#include <cstdlib>
+#include <sstream>
+#include <iomanip>
+#include <limits>
+>>>>>>> 7f737ac0baa48de69b4738358c4587596d03d9a4
 
 class Contact {
 public:
@@ -40,9 +52,25 @@ public:
     }
 
 private:
+<<<<<<< HEAD
     std::string truncate(const std::string& str) const {
         return (str.length() > 10) ? str.substr(0, 9) + "." : str;
     }
+=======
+    Contact contacts[MAX_USER];
+    int nbContact;
+
+public:
+    void addUser(void);
+    void checkUser(void);
+    void printContact(int i)const;
+    void displayContacts() const;
+    std::string truncate(const std::string &str) const;
+    int searchContact(void) const;
+
+    PhoneBook(void);
+    ~PhoneBook(void);
+>>>>>>> 7f737ac0baa48de69b4738358c4587596d03d9a4
 };
 
 class PhoneBook {
