@@ -2,7 +2,7 @@
 
 class HumanA{
 public:
-    HumanA(std::string name);
+    HumanA(std::string name):_name();
     HumanA();
     ~HumanA();
 private:
