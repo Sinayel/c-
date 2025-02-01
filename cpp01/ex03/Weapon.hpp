@@ -4,10 +4,10 @@ class Weapon{
 public:
     Weapon();
     ~Weapon();
-    std::string Weapon::getType(){
+    std::string getType(){
         return this->_type;
     }
-    void Weapon::setType(std::string type){
+    void setType(std::string type){
         this->_type = type;
     }
 private:

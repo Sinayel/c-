@@ -2,10 +2,11 @@
 
 class HumanA{
 public:
-    HumanA(std::string name):_name();
-    HumanA();
+    HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(weapon) {};
+    void attack();
+    HumanA() = delete;
     ~HumanA();
 private:
     std::string _name;
-    std::string _weapon;
+    Weapon &_weapon;
 };

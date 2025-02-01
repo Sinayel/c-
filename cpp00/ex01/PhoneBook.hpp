@@ -5,27 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylouvel <ylouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
-/*   Created: 2025/01/26 16:17:00 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/01/26 16:48:12 by ylouvel          ###   ########.fr       */
-=======
 /*   Created: 2025/01/20 14:14:36 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/01/24 16:56:34 by ylouvel          ###   ########.fr       */
->>>>>>> 7f737ac0baa48de69b4738358c4587596d03d9a4
+/*   Updated: 2025/02/01 15:21:49 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-<<<<<<< HEAD
 #include <iomanip>
 #include <string>
 #include <cctype>
-=======
 #include <cstdlib>
 #include <sstream>
-#include <iomanip>
 #include <limits>
->>>>>>> 7f737ac0baa48de69b4738358c4587596d03d9a4
 
 class Contact {
 public:
@@ -52,37 +43,17 @@ public:
     }
 
 private:
-<<<<<<< HEAD
     std::string truncate(const std::string& str) const {
         return (str.length() > 10) ? str.substr(0, 9) + "." : str;
     }
-=======
-    Contact contacts[MAX_USER];
-    int nbContact;
-
-public:
-    void addUser(void);
-    void checkUser(void);
-    void printContact(int i)const;
-    void displayContacts() const;
-    std::string truncate(const std::string &str) const;
-    int searchContact(void) const;
-
-    PhoneBook(void);
-    ~PhoneBook(void);
->>>>>>> 7f737ac0baa48de69b4738358c4587596d03d9a4
 };
 
 class PhoneBook {
 public:
-    PhoneBook() : contactCount(0) {}
+    PhoneBook() : contactCount(0), oldestIndex(0) {};
 
     void addContact() {
-        if (contactCount == 8) {
-            std::cout << "PhoneBook is full. Replacing the oldest contact." << std::endl;
-        }
-
-        int index = (contactCount < 8) ? contactCount : contactCount % 8;
+        int index = (contactCount < 8) ? contactCount : oldestIndex;
 
         contacts[index].firstName = promptField("Enter First Name: ");
         contacts[index].lastName = promptField("Enter Last Name: ");
@@ -90,7 +61,12 @@ public:
         contacts[index].phoneNumber = promptField("Enter Phone Number (digits only): ", true);
         contacts[index].darkestSecret = promptField("Enter Darkest Secret: ");
 
-        if (contactCount < 8) ++contactCount;
+        if (contactCount < 8) {
+            ++contactCount;
+        }
+        
+        oldestIndex = (oldestIndex + 1) % 8;
+        
         std::cout << "Contact added successfully!" << std::endl;
     }
 
@@ -101,8 +77,10 @@ public:
         }
 
         std::cout << "     Index | First Name |  Last Name |   Nickname" << std::endl;
+
         for (int i = 0; i < contactCount; ++i) {
-            contacts[i].displaySummary(i + 1);
+            int index = (oldestIndex + contactCount - 1 - i) % contactCount; 
+            contacts[index].displaySummary(i + 1);
         }
 
         std::cout << "Enter the index of the contact to view: ";
@@ -120,12 +98,14 @@ public:
             return;
         }
 
-        contacts[index - 1].displayDetails();
+        int realIndex = (oldestIndex + contactCount - index) % contactCount;
+        contacts[realIndex].displayDetails();
     }
 
 private:
     Contact contacts[8];
     int contactCount;
+    int oldestIndex;
 
     std::string promptField(const std::string& prompt, bool isNumeric = false) {
         std::string value;
