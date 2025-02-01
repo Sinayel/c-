@@ -5,11 +5,8 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
 SRCS = main.cpp \
 		Weapon.cpp \
-		HumandA.cpp \
-		HumanB.cpp \
-		HumanA.hpp \
-		HumanB.hpp \
-		Weapon.hpp
+		HumanA.cpp \
+		HumanB.cpp
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
