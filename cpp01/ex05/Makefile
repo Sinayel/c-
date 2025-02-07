@@ -1,10 +1,10 @@
-NAME = Replace
+NAME = Harl
 
 CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
 SRCS = main.cpp \
-		fileReplace.cpp
+		Harl.cpp
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
