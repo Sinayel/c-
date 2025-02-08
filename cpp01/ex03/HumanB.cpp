@@ -1,6 +1,6 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : _name(name), _weapon(nullptr) {}  // Initialise _weapon à nullptr
+HumanB::HumanB(std::string name) : _name(name), _weapon(NULL) {}
 
 HumanB::~HumanB() {}
 
@@ -9,7 +9,7 @@ void HumanB::setWeapon(Weapon &weapon) {
 }
 
 void HumanB::attack() {
-    if (this->_weapon == nullptr) {
+    if (this->_weapon == NULL) {
         std::cout << this->_name << " has no weapon" << std::endl;
         return;
     }
