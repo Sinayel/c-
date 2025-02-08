@@ -2,7 +2,7 @@
 
 int	main(void)
 {
-	std::cout << "============= stackZombies =============" << std::endl;
+	std::cout << "------------ stackZombies ------------" << std::endl;
 	Zombie	zombie1("Zombie1");
 	Zombie	zombie2("Zombie2");
 	Zombie	zombie3;
@@ -13,7 +13,7 @@ int	main(void)
 	randomChump("randomChumpZ");
 
 	std::cout << std::endl;
-	std::cout << "============= heapZombies ==============" << std::endl;
+	std::cout << "------------ heapZombies ------------" << std::endl;
 	Zombie	*heapZ;
 
 	heapZ = newZombie("HeapZ");
