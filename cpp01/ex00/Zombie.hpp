@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -23,3 +24,25 @@ class Zombie {
         void setName(std::string name);
         void setType(std::string type);
 };
+=======
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
+
+#include <iostream>
+
+class Zombie{
+public:
+    Zombie();
+    Zombie(std::string name);
+    ~Zombie();
+    void announce(void)const;
+
+private:
+    std::string _name;
+};
+
+void randomChump(std::string name);
+Zombie *newZombie(std::string name);
+
+#endif
+>>>>>>> 7f30b27a6512db1999d45c2adbbbf12a2b3ba568
