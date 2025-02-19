@@ -31,7 +31,12 @@ void Harl::complain(std::string level) {
     for (int i = 0; i < 4; i++) {
         if (levels[i] == level) {
             (this->*functions[i])();
-            return;
+            return ;
         }
     }
+<<<<<<< HEAD
 }
+=======
+    std::cout << "[ UNKNOWN ]" << std::endl;
+}
+>>>>>>> a5c7df1e8718ef23417ccb39cb1b390ce489444e
