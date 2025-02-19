@@ -14,7 +14,7 @@ private:
     void info(void);
     void warning(void);
     void error(void);
-    
+
     typedef void (Harl::*function_p)(void);
 };
 
