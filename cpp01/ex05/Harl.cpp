@@ -34,9 +34,4 @@ void Harl::complain(std::string level) {
             return ;
         }
     }
-<<<<<<< HEAD
 }
-=======
-    std::cout << "[ UNKNOWN ]" << std::endl;
-}
->>>>>>> a5c7df1e8718ef23417ccb39cb1b390ce489444e
