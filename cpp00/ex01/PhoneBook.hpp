@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylouvel <ylouvel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:14:36 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/02/01 15:21:49 by ylouvel          ###   ########.fr       */
+/*   Updated: 2026/05/07 16:30:54 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ private:
 
     bool isNumber(const std::string& str) const {
         for (std::string::size_type i = 0; i < str.size(); ++i) {
-            if (!std::isdigit(str[i])) return false;
+            if (!std::isdigit(str[i]))
+                return false;
         }
         return true;
     }
