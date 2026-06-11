@@ -15,7 +15,6 @@ std::string FileReplace::replaceOccurrences(const std::string &content) const {
 		result += _s2;
 		lastPos = pos + _s1.length();
 	}
-    std::cout << "pos = " << pos << std::endl;
 	result.append(content, lastPos, content.length() - lastPos);
 
 	return (result);
