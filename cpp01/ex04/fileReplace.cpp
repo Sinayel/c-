@@ -1,44 +1,57 @@
 #include "fileReplace.hpp"
 
-FileReplace::FileReplace(const std::string &filename, const std::string &s1, const std::string &s2)
-    : _filename(filename), _s1(s1), _s2(s2) {}
+FileReplace::FileReplace(const std::string &filename, const std::string &s1, const std::string &s2) : _filename(filename), _s1(s1), _s2(s2) {}
 
-bool FileReplace::processFile() {
-    if (_s1.empty()) {
-        std::cerr << "Error: s1 cannot be empty." << std::endl;
-        return false;
-    }
+std::string FileReplace::replaceOccurrences(const std::string &content) const {
+	std::string	result;
+	size_t		pos;
+	size_t		lastPos;
 
-    std::ifstream inputFile(_filename.c_str());
-    if (!inputFile) {
-        std::cerr << "Error: Unable to open file '" << _filename << "'" << std::endl;
-        return false;
-    }
+	lastPos = 0;
 
-    std::ofstream outputFile((_filename + ".replace").c_str());
-    if (!outputFile) {
-        std::cerr << "Error: Unable to create output file '" << _filename << ".replace'" << std::endl;
-        return false;
-    }
+	while ((pos = content.find(_s1, lastPos)) != std::string::npos)
+	{
+		result.append(content, lastPos, pos - lastPos);
+		result += _s2;
+		lastPos = pos + _s1.length();
+	}
+    std::cout << "pos = " << pos << std::endl;
+	result.append(content, lastPos, content.length() - lastPos);
 
-    std::string line;
-    while (std::getline(inputFile, line)) {
-        outputFile << replaceOccurrences(line) << std::endl;
-    }
-
-    std::cout << "Replacement complete. Output written to: " << _filename << ".replace" << std::endl;
-    return true;
+	return (result);
 }
 
-std::string FileReplace::replaceOccurrences(const std::string &line) {
-    std::string result;
-    size_t pos = 0, lastPos = 0;
-    
-    while ((pos = line.find(_s1, lastPos)) != std::string::npos) {
-        result += line.substr(lastPos, pos - lastPos) + _s2;
-        lastPos = pos + _s1.length();
-    }
-    
-    result += line.substr(lastPos);
-    return result;
+bool FileReplace::processFile() const {
+	if (_s1.empty())
+	{
+		std::cerr << "Error: s1 cannot be empty." << std::endl;
+		return (false);
+	}
+
+	std::ifstream	input(_filename.c_str());
+	if (!input.is_open())
+	{
+		std::cerr << "Error: cannot open file " << _filename << std::endl;
+		return (false);
+	}
+
+	std::ofstream	output((_filename + ".replace").c_str());
+	if (!output.is_open())
+	{
+		std::cerr << "Error: cannot create file " << _filename << ".replace" << std::endl;
+		return (false);
+	}
+
+	std::string	content;
+	std::string	str;
+	while (std::getline(input, str))
+	{
+		content += str;
+		if (!input.eof())
+			content += '\n';
+	}
+
+	output << replaceOccurrences(content);
+
+	return (true);
 }

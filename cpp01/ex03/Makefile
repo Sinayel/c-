@@ -1,6 +1,6 @@
 NAME = UnnecessaryViolence
 
-CXX = g++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
 SRCS = main.cpp \
