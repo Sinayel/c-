@@ -12,7 +12,15 @@ ScavTrap::~ScavTrap() {
 }
 
 void ScavTrap::attack(const std::string& target) {
-    ClapTrap::attack(target);
+    if (_energyPoints > 0)
+    {
+        _energyPoints--;
+        std::cout << "ScavTrap " << _name << " attacks " << target
+                  << ", causing " << _attackDamage << " points of damage!"
+                  << " (Remaining Energy: " << _energyPoints << ")" << std::endl;
+    }
+    else
+        std::cout << "ScavTrap " << _name << " has no energy left to attack!" << std::endl;
 }
 
 void ScavTrap::guardGate() {
