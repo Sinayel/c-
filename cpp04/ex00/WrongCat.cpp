@@ -1,4 +1,4 @@
-#include "WrongCat.hpp"
+#include "hpp/WrongCat.hpp"
 #include <iostream>
 
 WrongCat::WrongCat() : WrongAnimal() {
@@ -21,5 +21,5 @@ WrongCat::~WrongCat() {
 }
 
 void WrongCat::makeSound() const {
-    std::cout << "Meow!" << std::endl;
+    std::cout << "WrongCat Meow!" << std::endl;
 }
