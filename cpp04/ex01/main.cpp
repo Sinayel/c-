@@ -6,37 +6,17 @@
 #include <iostream>
 
 int main(void) {
-	const Animal *animal = new Animal();
-	const Animal *dog = new Dog();
-	const Animal *cat = new Cat();
+	// const Animal *cat = new Cat();
+	// const Animal *dog = new Dog();
 
-	std::cout << animal->getType() << std::endl;
-	std::cout << dog->getType() << std::endl;
-	std::cout << cat->getType() << std::endl;
-	animal->makeSound();
-	dog->makeSound();
-	cat->makeSound();
+	const Dog *dogo = new Dog();
+	const Cat *cata = new Cat();
 
-	delete animal;
-	delete dog;
-	delete cat;
+	std::cout << std::endl << "Cat :" << cata->getBrain() << std::endl;
+	std::cout << "Dog :" << dogo->getBrain() << std::endl << std::endl;
 
-	Dog dogCopy;
-	Dog dogAssigned;
-	dogAssigned = dogCopy;
-	Cat catCopy;
-	Cat catAssigned(catCopy);
-
-	dogAssigned.makeSound();
-	catAssigned.makeSound();
-
-	WrongAnimal *wrongAnimal = new WrongAnimal();
-	WrongAnimal *wrongCat = new WrongCat();
-	std::cout << wrongCat->getType() << std::endl;
-	wrongAnimal->makeSound();
-	wrongCat->makeSound();
-	delete wrongAnimal;
-	delete wrongCat;
+	delete cata;
+	delete dogo;
 
 	return (0);
 }

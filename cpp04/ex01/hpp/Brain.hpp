@@ -1,7 +1,9 @@
 #ifndef BRAIN_HPP
 #define BRAIN_HPP
 
-#include "hpp/Animal.hpp"
+#include "Animal.hpp"
+#include <iostream>
+#include <string>
 
 class Brain
 {
@@ -10,6 +12,8 @@ private:
 public:
     Brain();
     ~Brain();
-}
+    Brain &operator=(const Brain &rhs);
+    std::string const &getType() const;
+};
 
 #endif

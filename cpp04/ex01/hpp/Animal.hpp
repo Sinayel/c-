@@ -1,8 +1,7 @@
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
-#include <string>
-#include "hpp/Brain.hpp"
+#include "Brain.hpp"
 
 class Animal
 {
